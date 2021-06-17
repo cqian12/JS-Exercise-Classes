@@ -219,7 +219,7 @@ class Airplane {
         + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
   */
 
-  class StudentStretch extends student {
+  class StudentStretch extends Student {
     constructor(info){
       super(info)
       this.grade = Math.floor(Math.random() * 101)
@@ -238,10 +238,18 @@ class Airplane {
       super(info)
     }
     actuallyGrade(student) {
-      student.grade 
+      let posNeg = Math.random();
+      
+      if (posNeg >= .5){
+        student.grade += Math.round(Math.random() * 5)
+      } else {
+        student.grade -= Math.round(Math.random() * 5)
+      }
     }
   }
 
+  //just replicate for PM 
+  
   //End of Challenge
   /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
   function foo(){
