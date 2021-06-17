@@ -52,6 +52,9 @@ class Airplane {
         this.stomach.push(someFood)
       }
     }
+    poop() {
+      this.stomach = []
+    }
     toString() {
       return `${this.name}, ${this.age}`
     }
@@ -74,7 +77,7 @@ class Airplane {
  class Car {
     constructor(model,milesPerGallon) {
       this.model = model
-      this.mpg = milesPerGallon
+      this.milesPerGallon = milesPerGallon
       this.tank = 0
       this.odometer = 0
     }
@@ -82,11 +85,11 @@ class Airplane {
       this.tank += gallons
     }
     drive(distance){
-      if(distance <= (this.tank *this.mpg)){
+      if(distance <= (this.tank *this.milesPerGallon)){
         this.odometer += distance
-        this.tank -= distance / this.mpg
+        this.tank -= distance / this.milesPerGallon
       } else {
-        this.odometer += this.tank*this.mpg
+        this.odometer += this.tank*this.milesPerGallon
         this.tank = 0
         return `I ran out of fuel at ${this.odometer} miles!`
       }
@@ -134,7 +137,7 @@ class Airplane {
   constructor(info){
     super(info)
     this.specialty = info.specialty
-    this.favLanguage = info.faveLanguage
+    this.favLanguage = info.favLanguage
     this.catchPhrase = info.catchPhrase 
   }
   demo(subject){
@@ -165,16 +168,19 @@ class Airplane {
        this.previousBackground = info.previousBackground
        this.className = info.className
        this.favSubjects = info.favSubjects
+       this.grade = Math.floor(Math.random() * 101)
      }
-    //  listSubjects() {
-    //   let result = "Loving "
-    //   this.favSubjects.reduce(result,)
-    //  }
+    listSubjects() {
+      let result = ""
+      result = this.favSubjects.reduce((acc,item) => acc + item + ", ","Loving ")
+      result += "!"
+      return result
+    }
      PRAssignment(subject){
-       return `${this.name} has submitted a PR for {subject}`
+       return `${this.name} has submitted a PR for ${subject}`
      }
      sprintChallenge(subject){
-      return `${this.name} has begun sprint challenge on {subject}`
+      return `${this.name} has begun sprint challenge on ${subject}`
      }
  }
   
@@ -191,8 +197,18 @@ class Airplane {
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
-     
+ class ProjectManager extends Instructor {
+     constructor(info){
+       super(info)
+       this.gradClassName = info.gradClassName
+       this.favInstructor = info.favInstructor 
+     }
+     standUp(channel){
+       return `${this.name} announces to ${channel}, @${channel} standy times!`
+     }
+     debugsCode(student,subject){
+       return `${this.name} debugs ${student.name}'s code on ${subject}`
+     }
  }
   /*
     STRETCH PROBLEM (no tests!)
@@ -203,6 +219,28 @@ class Airplane {
         + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
   */
 
+  class StudentStretch extends student {
+    constructor(info){
+      super(info)
+      this.grade = Math.floor(Math.random() * 101)
+    }
+    graduate() {
+      if (this.grade >= 70) {
+        return `You graduated!`
+      } else {
+        return `Not yet!`
+      }
+    }
+  }
+
+  class InstructorStretch extends Instructor {
+    constructor(info) {
+      super(info)
+    }
+    actuallyGrade(student) {
+      student.grade 
+    }
+  }
 
   //End of Challenge
   /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
